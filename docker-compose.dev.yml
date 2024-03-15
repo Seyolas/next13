@@ -13,4 +13,4 @@ services:
     tty: true
     environment:
       - PORT=3000
-    command: yarn dev
+    command: yarn start
