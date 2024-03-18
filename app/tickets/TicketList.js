@@ -1,7 +1,11 @@
+import Link from "next/link";
+
 async function getTickets() {
-  const res = await fetch(
-    "https://my.api.mockaroo.com/tickets.json?key=98d847b0"
-  );
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos", {
+    next: {
+      revalidate: 0,
+    },
+  });
   return res.json();
 }
 
@@ -12,12 +16,12 @@ export default async function Ticketlist() {
     <>
       {tickets?.map((item) => {
         return (
-          <div key={item?.id} className="card my-5">
-            <h3>{item?.title}</h3>
-            <p>{item?.body}</p>
-            <div className={`pill ${item?.priority}`}>
-              {item?.priority} priority
-            </div>
+          <div key={item?.userId} className="card my-5">
+            <Link href={`/tickets/${item?.id}`}>
+              <h3>{item?.title}</h3>
+              <p>body {item?.title}</p>
+              <div>{item?.completed} priority</div>
+            </Link>
           </div>
         );
       })}
